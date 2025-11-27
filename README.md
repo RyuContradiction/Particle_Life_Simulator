@@ -164,10 +164,11 @@ particle-life/
 
 ### Milestone 3: Testing & CI
 
- Unit Tests schreiben
- >70% Code Coverage
- GitHub Actions CI
- Linting im CI
+Unit Tests schreiben
+>70% Code Coverage
+GitHub Actions CI
+Linting im CI
+
 
 ### Milestone 4: Optimierung
 
