@@ -166,7 +166,7 @@ particle-life/
 
  Unit Tests schreiben
  >70% Code Coverage
- GitHub Actions CI 
+ GitHub Actions CI
  Linting im CI
 
 ### Milestone 4: Optimierung
