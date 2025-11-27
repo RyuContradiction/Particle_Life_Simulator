@@ -87,7 +87,7 @@ In jedem Frame passiert:
 ## Code-Qualität prüfen
 
 ## Ordner
-
+```
 particle-life/
 ├── .github/workflows/ci.yml   # Automatische Tests (GitHub Actions)
 ├── src/particle_life/         # Unser Code
@@ -103,10 +103,10 @@ particle-life/
 ├── pyproject.toml             # Projekt-Konfiguration & Dependencies
 ├── README.md                  # Diese Datei
 └── .gitignore                 # Dateien, die Git ignorieren soll
-
+```
 
 ## Architektur
-
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                           Application                               │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -133,7 +133,7 @@ particle-life/
 │                        └────────────────────┘                       │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
-
+```
 ### Wie wir arbeiten
 1. Fork des Respository erstellen
 2. Neues Issue auf GitHub erstellen
