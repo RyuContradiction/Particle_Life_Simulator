@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>14</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1694</x>
+      <y>770</y>
+      <w>560</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>Simulation
+--
+width 
+height
+screen
+clock
+config
+colors
+particle_system
+running 
+paused
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1036</x>
+      <y>784</y>
+      <w>294</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>AttractionMatrix
+--
+num_tyoes
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
