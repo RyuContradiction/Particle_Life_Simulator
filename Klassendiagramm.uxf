@@ -4,41 +4,129 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1694</x>
-      <y>770</y>
-      <w>560</w>
-      <h>350</h>
+      <x>770</x>
+      <y>462</y>
+      <w>294</w>
+      <h>266</h>
     </coordinates>
-    <panel_attributes>Simulation
+    <panel_attributes>Particles
 --
-width 
-height
-screen
-clock
-config
-colors
-particle_system
-running 
-paused
+- particles: np.ndarray
+- radius: np.ndarray #particles sollte doch lieber mit nur x,y und typ sein. vielleicht wird typ auch ein eigenes Array
+- type: np.ndarray
 --
-</panel_attributes>
++ fill_array() -&gt; None
++ calc_friction -&gt; int|float
++ calc_velocity
++ update_arr -&gt; None</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1036</x>
-      <y>784</y>
+      <x>1512</x>
+      <y>462</y>
       <w>294</w>
       <h>266</h>
     </coordinates>
-    <panel_attributes>AttractionMatrix
+    <panel_attributes>Simulation
 --
-num_tyoes
+#Operation(i: int): int
+/+AbstractOperation()/
 --
 Responsibilities
 -- Resp1
 *-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1876</x>
+      <y>462</y>
+      <w>294</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>Config
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1288</x>
+      <y>1064</y>
+      <w>168</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>Simulation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>756</x>
+      <y>1008</y>
+      <w>168</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>Particle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1022</x>
+      <y>1050</y>
+      <w>168</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>Kräfte</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1484</x>
+      <y>1064</y>
+      <w>280</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>config</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1120</x>
+      <y>462</y>
+      <w>322</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>Interaction
+--
+- interactionmatrix: np.ndarray
+--
++ interaction -&gt; [1,-1]
++ pull
++ push</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1792</x>
+      <y>952</y>
+      <w>322</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>Knn (r-NN)</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
