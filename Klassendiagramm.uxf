@@ -4,27 +4,27 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
+      <x>756</x>
       <y>462</y>
-      <w>294</w>
+      <w>322</w>
       <h>266</h>
     </coordinates>
     <panel_attributes>Particles
 --
 - particles: np.ndarray
+- velocity: np.ndarray
 - radius: np.ndarray #particles sollte doch lieber mit nur x,y und typ sein. vielleicht wird typ auch ein eigenes Array
 - type: np.ndarray
 --
-+ fill_array() -&gt; None
-+ calc_friction -&gt; int|float
-+ calc_velocity
-+ update_arr -&gt; None</panel_attributes>
++ fill_arrays() -&gt; None
++ calc_velocity() #so wie ein Mensch,soll sich ein Partikel von selbst bewgenf benutzt calc_friction (oder die methode calc_force) der classe Enviormoment auf mit den parametern (type, velocity, radius, particles) oder doch import?
++ update_arr() -&gt; None</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1512</x>
+      <x>1484</x>
       <y>462</y>
       <w>294</w>
       <h>266</h>
@@ -42,7 +42,7 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1876</x>
+      <x>1820</x>
       <y>462</y>
       <w>294</w>
       <h>266</h>
@@ -109,13 +109,14 @@ Responsibilities
       <w>322</w>
       <h>266</h>
     </coordinates>
-    <panel_attributes>Interaction
+    <panel_attributes>Enviormoment
 --
 - interactionmatrix: np.ndarray
 --
-+ interaction -&gt; [1,-1]
-+ pull
-+ push</panel_attributes>
++ check_interactions() -&gt; [1,-1, 0] (ein array aus diesesn Zahlen werten) #push, pull, nothing, hier kommt r-NN
++ calc_force() # anstatt pull und push, werden mit dem return aus check_interactions multiplizieren um pull und push zu erzeugen (aber die null macht noch probleme)
++ calc_friction() -&gt; int|float #die reibung ist von der umgebung abhängig, auf erden und im all unterschiedlich 
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
