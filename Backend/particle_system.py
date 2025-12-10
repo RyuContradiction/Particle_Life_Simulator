@@ -14,7 +14,7 @@ def generate_particle() -> None:
         None
     """
     position = np.random.rand(NUM_PARTICLES, 2)
-    velocity = np.zeros(NUM_PARTICLES, 2) # Initial velocity is zero
+    velocity = np.zeros((NUM_PARTICLES, 2)) # Initial velocity is zero
     types = np.random.randint(0, 4, NUM_PARTICLES) # Randomly assign one of 4 types
     return position, velocity, types  
 
