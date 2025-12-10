@@ -204,8 +204,3 @@ Created as a student project to demonstrate professional Python development with
 
 MIT License
 
----
-
-**About**: A demonstration of emergent behavior through particle interactions  
-**Stars**: ⭐ 1  
-**Language**: Python 100.0%
