@@ -8,7 +8,7 @@ def generate_particle() -> None:
 
     Args:
         number_of_particles (int): The number of particles to generate.
-        particle_type (str): The type of particles to generate (e.g., 'electron', 'proton').
+        particle_type (str): The type of particles to generate (e.g., 'RED', 'GREEN', etc.).
 
     Returns:
         None
@@ -17,3 +17,22 @@ def generate_particle() -> None:
     velocity = np.zeros(NUM_PARTICLES, 2) # Initial velocity is zero
     types = np.random.randint(0, 4, NUM_PARTICLES) # Randomly assign one of 4 types
     return position, velocity, types  
+
+
+def update_velocity():
+    """
+    Updates the velocity of particles based on their interactions.
+
+    Returns:
+        None
+    """
+    pass  
+
+def update_position():
+    """
+    Updates the position of particles based on their velocity.
+
+    Returns:
+        None
+    """
+    pass
