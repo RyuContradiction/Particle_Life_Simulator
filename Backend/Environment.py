@@ -91,5 +91,9 @@ class Environment:
         Fy_total[index] += friction_y[index]
 
         return Fx_total, Fy_total
+    
+
+    def diffuse(self):
+        pass
 
         
