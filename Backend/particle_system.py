@@ -1,38 +1,28 @@
-
-from config import NUM_PARTICLES
 import numpy as np
+from Backend.config import NUM_PARTICLES, NUM_TYPES, WIDTH, HEIGHT
 
-def generate_particle() -> None:
+
+class ParticleSystem:
     """
-    Generates a specified number of particles of a given type.
-
-    Args:
-        number_of_particles (int): The number of particles to generate.
-        particle_type (str): The type of particles to generate (e.g., 'RED', 'GREEN', etc.).
-
-    Returns:
-        None
+    Verwaltet alle Partikel als NumPy Arrays.
+    
     """
-    position = np.random.rand(NUM_PARTICLES, 2)
-    velocity = np.zeros(NUM_PARTICLES, 2) # Initial velocity is zero
-    types = np.random.randint(0, 4, NUM_PARTICLES) # Randomly assign one of 4 types
-    return position, velocity, types  
-
-
-def update_velocity():
-    """
-    Updates the velocity of particles based on their interactions.
-
-    Returns:
-        None
-    """
-    pass  
-
-def update_position():
-    """
-    Updates the position of particles based on their velocity.
-
-    Returns:
-        None
-    """
-    pass
+    
+    def __init__(self, num_particles=NUM_PARTICLES, num_types=NUM_TYPES):
+        """
+        Erstellt ein neues Partikelsystem.
+        
+        Args:
+            num_particles: Anzahl der Partikel (default aus config.py)
+            num_types: Anzahl der Typen, z.B. 4 für Rot/Grün/Blau/Gelb
+        """
+        # Position: Zufällig im Fenster verteilt (0 bis WIDTH/HEIGHT)
+        self.x = np.random.rand(num_particles) * WIDTH
+        self.y = np.random.rand(num_particles) * HEIGHT
+        
+        # Geschwindigkeit: Startet bei 0 für alle Partikel
+        self.velocity_x = np.zeros(num_particles)
+        self.velocity_y = np.zeros(num_particles)
+        
+        # Typ: Zufällig zwischen 0 und num_types-1 (bestimmt Farbe & Verhalten)
+        self.types = np.random.randint(0, num_types, num_particles)
