@@ -49,9 +49,7 @@ INTERACTION_MATRIX = np.array([
 # ==================== PARTICLES  ====================
 class Particles:
     """
-    Verwaltet alle Partikel als NumPy Arrays.
-    
-    Basiert auf dem Code im Repo, ergänzt um @property
+    Verwaltet alle Partikel als NumPy Arrays, ergänzt um @property
     """
     
     def __init__(self):
@@ -122,12 +120,10 @@ class Environment:
     
     def check_interactions(self, position_x, position_y, radius, index) -> Optional[np.ndarray]:
         """
-        Bugfixes:
-        - Klammern bei Vergleichen hinzugefügt
-        - Tippfehler korrigiert
+        Bugfixes: Klammern und Tippfehler
         """
-        # Masken-Konzept (mit Bugfixes)
-        # Original: maske_x = self._particles.x >= position_x & self._particles.x <= position_x + radius
+        # Masken-Konzept
+        
         # Bugfix: Klammern, und Radius in beide Richtungen
 
         maske_x = (self._particles.x >= position_x - radius) & (self._particles.x <= position_x + radius)
@@ -148,7 +144,7 @@ class Environment:
         my_type = self._particles.types[index]
         interactions = self._interactionmatrix[my_type, n_types]
         
-        # Return als Tuple statt np.array für bessere Lesbarkeit
+        # Return als Tuple statt np.array 
 
         return (neighbours_x, neighbours_y, interactions, maske_n)
 
@@ -158,11 +154,9 @@ class Environment:
 
     def calc_friction(self, velocity_x: np.ndarray, velocity_y: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Calculate friction forces for all particles.
-        Note: friction is returned with a sign that *opposes* the velocity.
+        friction forces für alle Partikel
         
-        HINWEIS: Diese Methode wird nicht mehr in step() verwendet.
-        Reibung wird jetzt als direkter Dämpfungsfaktor angewendet.
+        Wichtig: Diese Methode wird nicht mehr in step() verwendet, Reibung jetzt als direkter Dämpfungsfaktor 
         """
         friction_x = -FRICTION * velocity_x
         friction_y = -FRICTION * velocity_y
@@ -180,9 +174,9 @@ class Environment:
         ## velocity_y: Optional[np.ndarray] = None,
     ) -> Tuple[float, float]:
         """
-        Berechnet Kraft für einen Partikel.
+        Berechnet Kraft für einen Partikel
         
-        jetzt vereinfacht für Simulation, aber mir check_interactions() für Nachbarsuche.
+       vereinfacht für Simulation, aber mir check_interactions() für Nachbarsuche
         """
         px = self._particles.x[index]
         py = self._particles.y[index]
@@ -224,7 +218,7 @@ class Environment:
 
     def step(self, dt: float = 0.01) -> None:
         """
-        Führt einen Simulationsschritt durch.
+        Führt nen Simulationsschritt durch
         """
         n = NUM_PARTICLES
         
