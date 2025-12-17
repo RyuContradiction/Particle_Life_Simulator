@@ -204,6 +204,14 @@ class Environment:
         unit_x = dx / (distances + eps)
         unit_y = dy / (distances + eps)
         
+        # FIX 3: Nahbereichs-Abstoßung, weil Partikel sollen sich nie überlagern
+        # Mindestabstand = 2 * PARTICLE_RADIUS (beide Radien zusammen)
+        MIN_DIST = 2 * PARTICLE_RADIUS
+        # Starke Abstoßung wenn Distanz < MIN_DIST, quadratisch für harte Abstoßung
+        repulsion = np.where(distances < MIN_DIST,
+                             (MIN_DIST - distances)**2 * 10.0,
+                             0.0)
+        
         # Kraft berechnen
         # Original: force_scalar * (dx / distance) - also lineare Kraft
         # statt Coulomb /r² hier
@@ -211,8 +219,9 @@ class Environment:
         
         # Summe aller Kräfte
         # FIX 1: Negatives Vorzeichen, damit positive Interaktion = Abstoßung
-        fx = -np.sum(force_magnitude * unit_x)
-        fy = -np.sum(force_magnitude * unit_y)
+        # Repulsion wird subtrahiert (zeigt weg vom Nachbarn)
+        fx = -np.sum(force_magnitude * unit_x) - np.sum(repulsion * unit_x / (distances + eps))
+        fy = -np.sum(force_magnitude * unit_y) - np.sum(repulsion * unit_y / (distances + eps))
         
         return fx, fy
 
