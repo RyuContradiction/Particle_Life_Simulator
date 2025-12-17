@@ -7,6 +7,7 @@ Integriert habe ich:
 - Config/config.py (mit INTERACTION_MATRIX ergänzt)
 - Backend/Environment.py (Code mit Bugfixes)
 - Ergänzungen (calc_friction, calc_force)
+- damit Partikel sich nicht überlagern fixes2 und 3 etc. s.u.
 """
 
 import numpy as np
@@ -165,11 +166,8 @@ class Environment:
     def calc_force(
         self,
         index: int,
-        ## R.s weitere Parameter - nicht alle werden gebraucht für unsere vereinfachte Version
-        ## neigh_idx,
-        ## position: np.ndarray,
-        ## type_idx,
-        ## interaction: np.ndarray,
+        ## weitere Parameter erstmal rausgelassen
+        ## neigh_idx,, position: np.ndarray, type_idx, interaction: np.ndarray,
         ## velocity_x: Optional[np.ndarray] = None,
         ## velocity_y: Optional[np.ndarray] = None,
     ) -> Tuple[float, float]:
@@ -196,15 +194,14 @@ class Environment:
         distances = np.sqrt(dx.astype(float)**2 + dy.astype(float)**2)
         
         # Epsilon gegen Division durch 0
-        # TODO: Bei sehr kleinen Distanzen können Kräfte trotz eps explodieren.
-        # Evtl. Mindestabstand oder Soft-Core-Potential implementieren.
+      
         eps = 1e-12
         
         # Einheitsvektor (Richtung)
         unit_x = dx / (distances + eps)
         unit_y = dy / (distances + eps)
         
-        # FIX 3: Nahbereichs-Abstoßung, weil Partikel sollen sich nie überlagern
+        # FIX 3: Nahbereichs-Abstoßung - Partikel sollen sich nie überlagern
         # Mindestabstand = 2 * PARTICLE_RADIUS (beide Radien zusammen)
         MIN_DIST = 2 * PARTICLE_RADIUS
         # Starke Abstoßung wenn Distanz < MIN_DIST, quadratisch für harte Abstoßung
@@ -220,8 +217,8 @@ class Environment:
         # Summe aller Kräfte
         # FIX 1: Negatives Vorzeichen, damit positive Interaktion = Abstoßung
         # Repulsion wird subtrahiert (zeigt weg vom Nachbarn)
-        fx = -np.sum(force_magnitude * unit_x) - np.sum(repulsion * unit_x / (distances + eps))
-        fy = -np.sum(force_magnitude * unit_y) - np.sum(repulsion * unit_y / (distances + eps))
+        fx = -np.sum(force_magnitude * unit_x) - np.sum(repulsion * unit_x)
+        fy = -np.sum(force_magnitude * unit_y) - np.sum(repulsion * unit_y)
         
         return fx, fy
 
