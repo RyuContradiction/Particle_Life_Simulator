@@ -21,11 +21,11 @@ class Particles:
     
     def __init__(self):
             # keine Parameter
-            self._x = np.random.rand(NUM_PARTICLES) * WIDTH
-            self._y = np.random.rand(NUM_PARTICLES) * HEIGHT
-            self._velocity_x = np.zeros(NUM_PARTICLES)
-            self._velocity_y = np.zeros(NUM_PARTICLES)
-            self._types = np.random.randint(0, NUM_TYPES, NUM_PARTICLES)
+            self.x = np.random.rand(NUM_PARTICLES) * WIDTH
+            self.y = np.random.rand(NUM_PARTICLES) * HEIGHT
+            self.velocity_x = np.zeros(NUM_PARTICLES)
+            self.velocity_y = np.zeros(NUM_PARTICLES)
+            self.types = np.random.randint(0, NUM_TYPES, NUM_PARTICLES)
         
             # mit property
             @property
