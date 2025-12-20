@@ -140,8 +140,8 @@ class Environment:
         return Fx_total, Fy_total
     
 
-    def diffuse(self):
-        pass
+    def get_particles_x(self):
+        return self.particles.x 
 
-        
-
+    def get_particles_y(self):
+        return self.particles.y 
