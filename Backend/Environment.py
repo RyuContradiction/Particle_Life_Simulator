@@ -53,7 +53,7 @@ class Environment:
 			f2: np.ndarray = f1 * -1
 
             #mit Reibungskraft verechnen
-            f1 = f1 - gamma * 
+            f1 = f1 - gamma * self._particles.velocity_x[indices[0]] 
 
 			a1: np.ndarray = f1 / m1
 			a2: np.ndarray = f2 / m2
