@@ -29,5 +29,7 @@ def update(event):
 timer = app.Timer(interval=1/60, connect=update, start=True)
 
 # Starten
-canvas.show()
-app.run()
+def start():
+
+    canvas.show()
+    app.run()
