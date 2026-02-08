@@ -1,6 +1,6 @@
 import numpy as np
 import numba
-from particle_system import Particles
+from .particle_system import Particles
 from typing import Tuple, Optional
 from Config.config import *
 
@@ -13,7 +13,7 @@ class Environment:
                                                        [3, -1, -1, 1, 1],
                                                        [4, 1, 1, 1, -1]])
         self._particles: Particles = Particles()
-        self._checked_particles: np.ndarray= np.zeros(self._particles.shape)
+        self._checked_particles: np.ndarray= np.zeros((self._particles.shape()), dtype = int)
 
     @numba.jit(nopython = True)
     def check_interactions(self, position_x, position_y, radius, index) -> np.ndarray:
