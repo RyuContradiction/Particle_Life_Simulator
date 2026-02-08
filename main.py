@@ -5,3 +5,5 @@ Ausführen:
     python main.py
 """
 from Frontend.visualize import *
+
+start()
