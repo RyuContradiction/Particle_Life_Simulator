@@ -15,6 +15,9 @@ class Particles:
         self._velocity_y = np.zeros(num_particles)
         self._types = np.random.randint(0, num_types, num_particles)
 
+    def shape(self) -> tuple[int]:
+        return self._x.shape
+
     # x - Getter gibt Array zurück, Setter gibt nichts zurück
     @property
     def x(self) -> np.ndarray:
