@@ -1,6 +1,6 @@
 import numpy as np
 from vispy import app, scene
-from Backend.Simulation import Simulation
+from Backend.Simulation import Environment
 from Config.config import WIDTH, HEIGHT, COLORS_VISPY
 
 """
@@ -12,7 +12,7 @@ canvas = scene.SceneCanvas(size=(WIDTH, HEIGHT), title='Particle Life')
 view = canvas.central_widget.add_view()
 
 # Simulation
-sim = Simulation()
+sim = Environment()
 
 # Punkte
 scatter = scene.visuals.Markers(parent=view.scene)
