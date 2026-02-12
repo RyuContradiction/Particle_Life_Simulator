@@ -1,26 +1,19 @@
 import numpy as np
+from Backend.Simulation import Simulation
+from Backend.Particles import Particles
+from Frontend.Visualize import Visualize
 
-# Fenstergröße
-WIDTH, HEIGHT = 800, 800
-
-# Simulationsparameter
-NUM_PARTICLES = 5000 
-PARTICLE_RADIUS = 3
-FRICTION = 0.95  # Dämpfung der Geschwindigkeit (0.0 bis 1.0)
-MAX_SPEED = 5
-INTERACTION_RADIUS = 100
-ATTRACTION_STRENGTH = 0.05
-RANDOM_FORCE_STRENGTH = 0.5 # Stärke der zufälligen Anfangsbewegung
-
-# Farben und Partikeltypen
-COLORS = {
-    'RED': (255, 60, 60),
-    'GREEN': (60, 255, 60),
-    'BLUE': (60, 60, 255),
-    'YELLOW': (255, 255, 60)
-}
-COLOR_LIST = list(COLORS.keys())
-
-# NumPy-Array der Farbwerte für schnellen Zugriff
-COLOR_VALUES = np.array(list(COLORS.values())) 
-NUM_TYPES = len(COLOR_LIST)
+def config():
+    #intanzierungen und configurierung
+    particles = Particles(x = np.random.normal(loc=0.0, scale=10.0, size=10000),
+                 y = np.random.normal(loc=0.0, scale=10.0, size=10000), 
+                 velocity_x = np.zeros(10000), 
+                 velocity_y = np.zeros(10000),  
+                 types = np.clip(np.rint(np.random.normal(loc=0, scale=1.0, size=10000)), 0, 4).astype(int),
+                 radius = 20)
+    simulation = Simulation(particles=particles)
+    visualize = Visualize(simulation=simulation, particles=particles)
+    visualize.start()
+    
+    
+    
