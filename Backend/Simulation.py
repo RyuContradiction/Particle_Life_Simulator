@@ -16,6 +16,10 @@ class Simulation:
         self._particles: Particles = Particles()
         self._checked_particles: np.ndarray= np.zeros((self._particles.x.shape[0], self._particles.x.shape[0]), dtype= bool)
 
+    @property
+    def interactionmatrix(self) -> np.ndarray:
+        return self._interactionmatrix
+
     def check_interactions(self, position_x, position_y, radius, index):
         # AABB um den Punkt (symmetrisch)
         maske_x = (self._particles.x >= position_x - radius) & (self._particles.x <= position_x + radius)
@@ -46,8 +50,6 @@ class Simulation:
         interactions[:, 1] = neigh_types
 
         return neighbours_x, neighbours_y, interactions, indices
-
-    import numpy as np
 
     def calc_velocity(
         self,

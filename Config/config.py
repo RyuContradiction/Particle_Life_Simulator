@@ -12,7 +12,8 @@ def config():
                  types = np.clip(np.rint(np.random.normal(loc=0, scale=1.0, size=10000)), 0, 4).astype(int),
                  radius = 20)
     simulation = Simulation(particles=particles)
-    visualize = Visualize(simulation=simulation, particles=particles)
+    domain = ((0.0, 1.0), (0.0, 1.0))  # set your world bounds here
+    visualize = Visualize(simulation=simulation, particles=particles, domain=domain)
     visualize.start()
     
     
