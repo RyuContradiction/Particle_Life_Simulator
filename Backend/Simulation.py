@@ -5,12 +5,12 @@ from typing import Tuple, Optional
 
 class Simulation: 
     def __init__(self, 
-                 interactionmatrix: np.ndarray = np.array([[0, 1, 2, 3, 4],
-                                                       [1, 1, -1, -1, 1],
-                                                       [2, -1, 1, -1, 1],
-                                                       [3, -1, -1, 1, 1],
-                                                       [4, -1, 1, 1, -1]]),
-                 particles: Particels = Particles()):
+                 interactionmatrix: np.ndarray = np.array([[1, -1, 1, -1, 1],
+                                                           [-1, -1, -1, 1, -1],
+                                                           [1, -1, 1, 1, -1],
+                                                           [-1, 1, 1, -1, 1],
+                                                           [1, -1, -1, 1, 1]]),
+                 particles: Particles = Particles()):
 
         self._interactionmatrix: np.ndarray = interactionmatrix 
         self._particles: Particles = Particles()
@@ -48,6 +48,7 @@ class Simulation:
         interactions = np.empty((indices.size, 2), dtype=np.int64)
         interactions[:, 0] = curr_type
         interactions[:, 1] = neigh_types
+        
 
         return neighbours_x, neighbours_y, interactions, indices
 
