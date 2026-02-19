@@ -10,3 +10,4 @@ dependencies:
   - pytest
   - flake8
   - numba
+  - ruff
