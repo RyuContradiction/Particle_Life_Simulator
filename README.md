@@ -60,7 +60,11 @@ cd particle-life
 ```
 
 ## start program
-python -m main.py
+python -m particle_life
+
+## Apps needed to view Diagrams
+- PAP Desinger: http://friedrich-folkmann.de/papdesigner/Download-v2.2.0.8.08.html
+- Umlet: https://www.umlet.com/changes.htm
 ```
 
 ## How does the simulation work?
