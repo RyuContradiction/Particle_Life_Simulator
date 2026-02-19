@@ -19,7 +19,7 @@ class Simulation:
     def interactionmatrix(self) -> np.ndarray:
         return self._interactionmatrix
 
-    def check_interactions(self, position_x, position_y, radius, index):
+    def check_interactions(self, position_x, position_y, radius, index) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         # AABB um den Punkt (symmetrisch)
         maske_x = (self._particles.x >= position_x - radius) & (self._particles.x <= position_x + radius)
         maske_y = (self._particles.y >= position_y - radius) & (self._particles.y <= position_y + radius)
@@ -71,7 +71,7 @@ class Simulation:
         interactions: np.ndarray,     # (N,2) -> [current_type, neighbour_type]
         index: int,
         filtered_indices: np.ndarray
-        ):
+        ) -> None:
         # Konstanten (bei dir ggf. als Attribute speichern)
         k: float = 1.0
         m1: float = 1.0

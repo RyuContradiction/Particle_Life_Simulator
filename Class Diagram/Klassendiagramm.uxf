@@ -4,143 +4,93 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
-      <y>558</y>
+      <x>36</x>
+      <y>450</y>
       <w>540</w>
-      <h>594</h>
+      <h>630</h>
     </coordinates>
     <panel_attributes>Particles
 --
-- x: np.ndarray
-- y: np.ndarray
-- radius: np.ndarray
-- velocity_x: np.ndarray
-- velocity_y: np.ndarray
+- x:np.ndarray
+- y:np.ndarray
+- radius:np.ndarray
+- velocity_x:np.ndarray
+- velocity_y:np.ndarray
 #particles sollte doch lieber mit nur x,y und typ sein. vielleicht wird typ auch ein eigenes Array
 - type: np.ndarray
 --
-+ get_x()
-+ get_y()
-+ set_x()
-+ set_y()
-+ get_radius
-+ set_radius_x
-+ set_radius_y
-+ get_type
-+ set_type
-+ get_velocity_x
-+ get_velocity_y</panel_attributes>
++ get_x():np.ndarray
++ get_y():np.ndarray
++ set_x(value:np.ndarray):void
++ set_y(value:np.ndarray):void
++ get_radius():int
++ set_radius(value: int):void
++ get_type():np.ndarrray
++ set_type(value:np.ndarray)
++ get_velocity_x():np.ndarray
++ get_velocity_y():np.ndarray
++ set_velocity_x(value:np.ndarray):void
++ set_velocity_y(value:np.ndarray):void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1764</x>
-      <y>558</y>
-      <w>378</w>
-      <h>342</h>
+      <x>2358</x>
+      <y>450</y>
+      <w>756</w>
+      <h>900</h>
     </coordinates>
     <panel_attributes>Visualize
 --
+- x
+- y
+- particles:Particles
+- simulation:Simulation
 - canvas
-- view
+- grid 
+- view_sim
+- view_mat 
+- palette:np.ndarray
+- colors:np.ndarray
 - scatter
+- pos0: np.ndarray
+- Lx: int
+- Ly: int
+- W : np.ndarray
+- img 
+- h int
+- w int
 --
-+ start()
-+ update()</panel_attributes>
++ start():void
++ update(event):void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2214</x>
-      <y>558</y>
-      <w>378</w>
-      <h>342</h>
-    </coordinates>
-    <panel_attributes>Config
---
-# Attribute wie Partivćle typen und allem einstellbaren
---
-# Methoden zum life einstellen</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1098</x>
-      <y>558</y>
-      <w>558</w>
-      <h>342</h>
+      <x>594</x>
+      <y>450</y>
+      <w>1692</w>
+      <h>540</h>
     </coordinates>
     <panel_attributes>Simulation
 --
-- interactionmatrix: np.ndarray
-- checked_particles: np.ndarray
-- particles: Particles
+- interactionmatrix:np.ndarray
+- checked_particles:np.ndarray
+- particles:Particles
 --
-+ check_interactions() -&gt; [1,-1, 0] (ein array aus diesesn Zahlen werten) #push, pull, nothing, hier kommt r-NN
-+ calc_force() # anstatt pull und push, werden mit dem return aus check_interactions multiplizieren um pull und push zu erzeugen (aber die null macht noch probleme)
-+ calc_friction() -&gt; int|float #die reibung ist von der umgebung abhängig, auf erden und im all unterschiedlich
-+ calc_velocity()
-+ diffuse()
-+ get_particles()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>2970</x>
-      <y>1494</y>
-      <w>54</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>*Use case 3*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>2736</x>
-      <y>1494</y>
-      <w>54</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>Use case 1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>2970</x>
-      <y>1296</y>
-      <w>54</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>*Use case 3*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1926</x>
-      <y>1080</y>
-      <w>108</w>
-      <h>342</h>
-    </coordinates>
-    <panel_attributes>typen</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>2034</x>
-      <y>1080</y>
-      <w>378</w>
-      <h>342</h>
-    </coordinates>
-    <panel_attributes>typen
---</panel_attributes>
++ check_interactions(position_x, position_y, radius, index) : tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
++ calc_velocity(
+        position_x:float,
+        position_y:float,
+        neighbours_x:np.ndarray,
+        neighbours_y:np.ndarray,
+        interactions:np.ndarray,
+        index: int,
+        filtered_indices: np.ndarray): void
++ diffuse():tuple[np.ndarray, np.ndarray]
++ get_interactionmatrix(): np.ndarray</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
