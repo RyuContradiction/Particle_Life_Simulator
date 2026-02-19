@@ -60,7 +60,7 @@ cd particle-life
 ```
 
 ## start program
-python -m particle_life
+python -m main.py
 ```
 
 ## How does the simulation work?
@@ -106,54 +106,13 @@ In each frame:
 
 ## Project Structure
 
-```
-particle-life/
-├── .github/workflows/ci.yml   # Automated tests (GitHub Actions)
-├── src/particle_life/         # Our code
-│   ├── __init__.py
-│   ├── __main__.py            # Entry point of the program
-│   ├── particles.py           # Particle data (position, velocity, type)
-│   ├── simulation.py          # Movement calculations
-│   ├── renderer.py            # Visualization (what we see)
-│   └── config.py              # Settings (colors, parameters)
-├── tests/                     # Our tests
-│   ├── test_particles.py
-│   └── test_simulation.py
-├── pyproject.toml             # Project configuration & dependencies
-├── README.md                  # This file
-└── .gitignore                 # Files Git should ignore
-```
+
+<img width="515" height="769" alt="image" src="https://github.com/user-attachments/assets/e2545728-936c-4960-9b6b-36f547a24b65" />
+
+
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                           Application                               │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌──────────────┐      ┌────────────────────┐      ┌─────────────┐  │
-│  │ ControlPanel │─────▶│    Simulation      │─────▶│  Renderer   │  │
-│  │              │      │                    │      │             │  │
-│  │              │      │  ┌──────────────┐  │      │             │  │
-│  │ - Sliders    │      │  │ParticleSystem│  │      │ - Canvas    │  │
-│  │ - Matrix UI  │      │  │              │  │      │ - Markers   │  │
-│  │ - Buttons    │      │  │ - positions  │  │      │ - Colors    │  │
-│  └──────────────┘      │  │ - velocities │  │      └─────────────┘  │
-│         │              │  │ - types      │  │            ▲          │
-│         │              │  └──────────────┘  │            │          │
-│         │              │                    │            │          │
-│         │              │  ┌──────────────┐  │            │          │
-│         └─────────────▶│  │ Interaction- │  │────────────┘          │
-│                        │  │    Matrix    │  │                       │
-│                        │  │              │  │                       │
-│                        │  │ - forces     │  │                       │
-│                        │  │ - radius     │  │                       │
-│                        │  │ - friction   │  │                       │
-│                        │  └──────────────┘  │                       │
-│                        └────────────────────┘                       │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-```
 
 ## Workflow
 
