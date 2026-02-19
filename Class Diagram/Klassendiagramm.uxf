@@ -88,19 +88,6 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>1386</x>
-      <y>1638</y>
-      <w>846</w>
-      <h>378</h>
-    </coordinates>
-    <panel_attributes>Formel fuer Lorentzkraft:
-
-bg=white</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLUseCase</id>
     <coordinates>
       <x>2970</x>
@@ -136,6 +123,17 @@ bg=white</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+      <x>1926</x>
+      <y>1080</y>
+      <w>108</w>
+      <h>342</h>
+    </coordinates>
+    <panel_attributes>typen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
       <x>2034</x>
       <y>1080</y>
       <w>378</w>
@@ -143,17 +141,6 @@ bg=white</panel_attributes>
     </coordinates>
     <panel_attributes>typen
 --</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1926</x>
-      <y>1080</y>
-      <w>108</w>
-      <h>342</h>
-    </coordinates>
-    <panel_attributes>typen</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
