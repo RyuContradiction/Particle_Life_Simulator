@@ -110,54 +110,43 @@ In each frame:
 
 ## Project Structure
 
-```
-particle-life/
-├── .github/workflows/ci.yml   # Automated tests (GitHub Actions)
-├── src/particle_life/         # Our code
-│   ├── __init__.py
-│   ├── __main__.py            # Entry point of the program
-│   ├── particles.py           # Particle data (position, velocity, type)
-│   ├── simulation.py          # Movement calculations
-│   ├── renderer.py            # Visualization (what we see)
-│   └── config.py              # Settings (colors, parameters)
-├── tests/                     # Our tests
-│   ├── test_particles.py
-│   └── test_simulation.py
-├── pyproject.toml             # Project configuration & dependencies
-├── README.md                  # This file
-└── .gitignore                 # Files Git should ignore
-```
+
+Particle_Life_Simulation
+│
+├─ backend
+│  ├─ __init__.py
+│  ├─ particles.py
+│  ├─ simulation.py
+│  
+├─ frontend
+│  ├─ __init__.py
+│  └─ visualize.py
+│
+├─ config
+│  ├─ __init__.py
+│  ├─ config.py
+│  └─ constants.py
+│
+├─ tests
+│  ├─ __init__.py
+│  ├─ test_particle_system.py
+│  └─ test_simulation.py
+│
+├─ diagrams
+│  └─ class_diagram.png
+│
+├─ main.py
+├─ pyproject.toml
+├─ README.md
+├─ LICENSE
+├─ requirements.txt
+└─ .gitignore
+
+
+
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                           Application                               │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌──────────────┐      ┌────────────────────┐      ┌─────────────┐  │
-│  │ ControlPanel │─────▶│    Simulation      │─────▶│  Renderer   │  │
-│  │              │      │                    │      │             │  │
-│  │              │      │  ┌──────────────┐  │      │             │  │
-│  │ - Sliders    │      │  │ParticleSystem│  │      │ - Canvas    │  │
-│  │ - Matrix UI  │      │  │              │  │      │ - Markers   │  │
-│  │ - Buttons    │      │  │ - positions  │  │      │ - Colors    │  │
-│  └──────────────┘      │  │ - velocities │  │      └─────────────┘  │
-│         │              │  │ - types      │  │            ▲          │
-│         │              │  └──────────────┘  │            │          │
-│         │              │                    │            │          │
-│         │              │  ┌──────────────┐  │            │          │
-│         └─────────────▶│  │ Interaction- │  │────────────┘          │
-│                        │  │    Matrix    │  │                       │
-│                        │  │              │  │                       │
-│                        │  │ - forces     │  │                       │
-│                        │  │ - radius     │  │                       │
-│                        │  │ - friction   │  │                       │
-│                        │  └──────────────┘  │                       │
-│                        └────────────────────┘                       │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-```
 
 ## Workflow
 
