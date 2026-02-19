@@ -107,7 +107,37 @@ In each frame:
 ## Project Structure
 
 
-<img width="515" height="769" alt="image" src="https://github.com/user-attachments/assets/e2545728-936c-4960-9b6b-36f547a24b65" />
+Particle_Life_Simulation
+│
+├─ backend
+│  ├─ __init__.py
+│  ├─ particles.py
+│  ├─ simulation.py
+│  
+├─ frontend
+│  ├─ __init__.py
+│  └─ visualize.py
+│
+├─ config
+│  ├─ __init__.py
+│  ├─ config.py
+│  └─ constants.py
+│
+├─ tests
+│  ├─ __init__.py
+│  ├─ test_particle_system.py
+│  └─ test_simulation.py
+│
+├─ diagrams
+│  └─ class_diagram.png
+│
+├─ main.py
+├─ pyproject.toml
+├─ README.md
+├─ LICENSE
+├─ requirements.txt
+└─ .gitignore
+
 
 
 
