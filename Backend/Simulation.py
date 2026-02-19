@@ -1,7 +1,6 @@
 import numpy as np
 from Backend.Particles import Particles
-from numba import njit, prange
-from typing import Tuple, Optional
+
 
 class Simulation: 
     def __init__(self, 
