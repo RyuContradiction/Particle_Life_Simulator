@@ -13,8 +13,8 @@ class Simulation:
                  particles: Particles = Particles()):
 
         self._interactionmatrix: np.ndarray = interactionmatrix 
-        self._particles: Particles = Particles()
-        self._checked_particles: np.ndarray= np.zeros((self._particles.x.shape[0], self._particles.x.shape[0]), dtype= bool)
+        self._particles: Particles = particles
+        self._checked_particles: np.ndarray = np.zeros((self._particles.x.shape[0], self._particles.x.shape[0]), dtype= bool)
 
     @property
     def interactionmatrix(self) -> np.ndarray:
@@ -40,17 +40,28 @@ class Simulation:
         neighbours_x = self._particles.x[indices]
         neighbours_y = self._particles.y[indices]
 
+        neighbours = self._checked_particles[index]
+        checked_neighbours = neighbours[indices]
+        filter_n = checked_neighbours == False
+        neighbours_x = neighbours_x[filter_n]
+        neighbours_y = neighbours_y[filter_n]
+
+
+
         # Typen der Nachbarn
         neigh_types = self._particles.types[indices]            # (N,)
+        neigh_types = neigh_types[filter_n]
         curr_type = self._particles.types[index]                # Skalar
 
         # interactions als (N,2): [ [curr_type, neigh_type], ... ]
-        interactions = np.empty((indices.size, 2), dtype=np.int64)
+        interactions = np.empty((np.sum(filter_n), 2), dtype=np.int64)
         interactions[:, 0] = curr_type
         interactions[:, 1] = neigh_types
+
+        filtered_indices = indices[filter_n]
         
 
-        return neighbours_x, neighbours_y, interactions, indices
+        return neighbours_x, neighbours_y, interactions, filtered_indices
 
     def calc_velocity(
         self,
@@ -60,7 +71,7 @@ class Simulation:
         neighbours_y: np.ndarray,     # (N,)
         interactions: np.ndarray,     # (N,2) -> [current_type, neighbour_type]
         index: int,
-        indices: np.ndarray,          # (N,) -> originale Nachbar-Indizes
+        filtered_indices: np.ndarray
         ):
         # Konstanten (bei dir ggf. als Attribute speichern)
         k: float = 1.0
@@ -73,6 +84,9 @@ class Simulation:
         N:int = neighbours_x.shape[0]
         if N == 0:
             return
+
+        
+
 
         # --- Geometrie (alles vektorisiert) ---
         # Vektoren vom aktuellen Partikel zu allen Nachbarn
@@ -111,17 +125,21 @@ class Simulation:
 
         # Reibung auf Nachbarn (N,2)
         v2: np.ndarray = np.column_stack((
-            self._particles.velocity_x[indices],
-            self._particles.velocity_y[indices],
+            self._particles.velocity_x[filtered_indices],
+            self._particles.velocity_y[filtered_indices],
         )).astype(np.float64)                           # (N,2)
         F2_pairs = F2_pairs - gamma * v2
 
         # Beschleunigung + Update für Nachbarn (vektorisiert)
         a2: np.ndarray = F2_pairs / m2                              # (N,2)
-        self._particles.velocity_x[indices] += a2[:, 0] * t
-        self._particles.velocity_y[indices] += a2[:, 1] * t
-        self._particles.x[indices] += self._particles.velocity_x[indices] * t
-        self._particles.y[indices] += self._particles.velocity_y[indices] * t
+        self._particles.velocity_x[filtered_indices] += a2[:, 0] * t
+        self._particles.velocity_y[filtered_indices] += a2[:, 1] * t
+        self._particles.x[filtered_indices] += self._particles.velocity_x[filtered_indices] * t
+        self._particles.y[filtered_indices] += self._particles.velocity_y[filtered_indices] * t
+
+        #Um doppelt berechnungen der Geschwindigkeit eines Partikel im zusammenhang eines anderen zu vermeiden, werden diese in einem Array vermerkt
+        index_array: np.ndarray = np.full(filtered_indices.shape, index)
+        self._checked_particles[filtered_indices, index_array] = True
                 
     def diffuse(self):
         for i in range(self._particles.x.shape[0]):
@@ -130,5 +148,6 @@ class Simulation:
                 continue
             neighbours_x, neighbours_y, interactions, indices = check
             self.calc_velocity(self._particles.x[i], self._particles.y[i],neighbours_x, neighbours_y, interactions, i, indices)
+        self._checked_particles.fill(False)
         return (self._particles.x, self._particles.y)
 

@@ -5,14 +5,16 @@ from Backend.Particles import Particles
 
 app.use_app("pyqt5")  # <-- VOR canvas
 
-x = np.random.normal(loc=0.0, scale=10.0, size=10000)
-y = np.random.normal(loc=0.0, scale=10.0, size=10000)
+N = 1_000
+
+x = np.random.normal(loc=0.0, scale=10.0, size=N)
+y = np.random.normal(loc=0.0, scale=10.0, size=N)
 
 particles = Particles(
     x, y,
-    velocity_x=np.zeros(10000),
-    velocity_y=np.zeros(10000),
-    types=np.random.randint(0, 5, size=10000),
+    velocity_x=np.zeros(N),
+    velocity_y=np.zeros(N),
+    types=np.random.randint(0, 5, size=N),
     radius=20
 )
 
@@ -44,7 +46,7 @@ scatter = scene.visuals.Markers(parent=view_sim.scene)
 pos0 = np.c_[x, y]
 scatter.set_data(pos0, face_color=colors, size=10)
 
-Lx, Ly = 100, 100
+Lx, Ly = 200, 200
 view_sim.camera.set_range(x=(-Lx/2, Lx/2), y=(-Ly/2, Ly/2))
 
 # --- Matrix (statisch) ---
@@ -72,12 +74,14 @@ def update(event):
     x_wrapped = ((x_new + Lx/2) % Lx) - Lx/2
     y_wrapped = ((y_new + Ly/2) % Ly) - Ly/2
 
-    pos = np.c_[x_wrapped, y_wrapped]
-    N = pos.shape[0]
-    colors_now = palette[particles.types[:N]]
+    # ✅ WICHTIG: Zustand zurück in particles schreiben
+    particles.x[:] = x_wrapped
+    particles.y[:] = y_wrapped
+
+    pos = np.c_[particles.x, particles.y]
+    colors_now = palette[particles.types]
 
     scatter.set_data(pos, face_color=colors_now, size=10)
-    canvas.update()
 
 timer = app.Timer(interval=0.016, connect=update, start=True)
 app.run()
