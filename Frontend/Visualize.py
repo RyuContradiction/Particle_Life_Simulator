@@ -1,5 +1,5 @@
 import numpy as np
-from vispy import app, scene
+from vispy import app, scene, color
 from Backend.Simulation import Simulation
 from Backend.Particles import Particles
 
@@ -39,18 +39,9 @@ class Visualize:
         self._Lx, self._Ly = 200, 200
         self._view_sim.camera.set_range(x=(-self._Lx/2, self._Lx/2), y=(-self._Ly/2, self._Ly/2))
 
-        # --- Matrix (statisch) ---
-        self._W = np.asarray(simulation.interactionmatrix)
-        self._img = scene.visuals.Image(self._W, parent=self._view_mat.scene, cmap="RdBu",
-                          interpolation="nearest", clim=(-1, 1))
+        self._img = None 
 
-        self._h, self._w = self._W.shape
-        self._view_mat.camera.set_range(x=(0, self._w), y=(0, self._h))
-
-        # optional: Matrix nicht zoombar/pannbar
-        self._view_mat.camera.interactive = False
-
-    def update(self,event):
+    def update(self,event) -> None:
         x_new, y_new = self._simulation.diffuse()
 
         # wrap-around
@@ -66,7 +57,43 @@ class Visualize:
 
         self._scatter.set_data(pos, face_color=colors_now, size=10)
 
+    def make_matrix_with_color_header(self, W: np.ndarray):
+        T = W.shape[0]
+        W = W.astype(np.float32, copy=False)
+
+        cmap = color.get_colormap("RdBu")
+        maxabs = float(np.max(np.abs(W))) if W.size else 1.0
+        if maxabs == 0:
+            maxabs = 1.0
+
+        norm = (W / maxabs) * 0.5 + 0.5
+        norm = np.clip(norm, 0.0, 1.0).astype(np.float32, copy=False)
+
+        # ✅ wichtig: map -> (T*T,4) und dann reshape
+        rgba_core = cmap.map(norm.ravel()).reshape(T, T, 4).astype(np.float32, copy=False)
+
+        rgba_img = np.zeros((T + 1, T + 1, 4), dtype=np.float32)
+        rgba_img[1:, 1:, :] = rgba_core
+        rgba_img[0, 1:, :] = self._palette[:T]
+        rgba_img[1:, 0, :] = self._palette[:T]
+        rgba_img[0, 0, :] = np.array([0, 0, 0, 1], dtype=np.float32)
+        print(type(rgba_img))
+        return rgba_img
+
+
     def start(self) -> None:
+        W = np.asarray(self._simulation.interactionmatrix)   # (5,5)
+        rgba_img = self.make_matrix_with_color_header(W)
+
+        self._img = scene.visuals.Image(
+            rgba_img,
+            parent=self._view_mat.scene,
+            interpolation="nearest"
+        )
+        h, w = rgba_img.shape[:2]
+        self._view_mat.camera.set_range(x=(0, w), y=(0, h))
+        self._view_mat.camera.interactive = False
+
         timer = app.Timer(interval=0.016, connect=self.update, start=True)
         app.run()
 
