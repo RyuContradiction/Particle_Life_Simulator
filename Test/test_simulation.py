@@ -40,7 +40,7 @@ def test_calc_velocity():
     # interactions should be (N, 2) with [type_i, type_j] pairs
     interactions = np.array([[0, 1]])  # particle type 0 interacting with particle type 1
     
-    sim.calc_velocity(0.0, 0.0, neighbours_x, neighbours_y, interactions, index=0, indices=np.array([1]))
+    sim.calc_velocity(0.0, 0.0, neighbours_x, neighbours_y, interactions, index=0, filtered_indices=np.array([1]))
     
     assert True
 
