@@ -60,7 +60,7 @@ cd particle-life
 ```
 
 ## start program
-python -m particle_life
+python main.py
 
 ## Apps needed to view Diagrams
 - PAP Desinger: http://friedrich-folkmann.de/papdesigner/Download-v2.2.0.8.08.html
