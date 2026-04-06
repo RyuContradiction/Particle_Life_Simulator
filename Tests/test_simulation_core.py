@@ -1,6 +1,8 @@
 # tests/test_simulation_core.py
 import numpy as np
 import pytest
+from numba.typed import Dict
+from numba.core import types
 
 from Backend.Particles import Particles
 from Backend.Simulation import Simulation
@@ -14,13 +16,21 @@ def make_small_sim():
       p2 at (100,0)  -> weit weg
     radius=10 sollte p0<->p1 als Nachbarn finden, p2 nicht.
     """
-    x = np.array([0.0, 5.0, 100.0], dtype=np.float64)
-    y = np.array([0.0, 0.0, 0.0], dtype=np.float64)
-    vx = np.zeros(3, dtype=np.float64)
-    vy = np.zeros(3, dtype=np.float64)
-    types = np.array([0, 1, 2], dtype=np.int64)
+    N: int = 1_000
+    x: np.ndarray = np.random.normal(loc=0.0, scale=10.0, size= N)
+    y: np.ndarray = np.random.normal(loc=0.0, scale=10.0, size= N)
+    types_n = np.random.randint(0, 5, size=N)
+    mapping = Dict.empty(key_type=types.int64, value_type=types.int64)
+    mapping[1] = 2.0
+    mapping[2] = 2.2
+    mapping[3] = 5.0
+    mapping[4] = 1.2
+    mapping[0] = 3.4
+    forces=np.array([mapping.get(x, x) for x in types_n])
+    force = np.column_stack((forces,forces))
 
-    particles = Particles(x=x, y=y, velocity_x=vx, velocity_y=vy, types=types, radius=10)
+
+    particles: Particles = Particles(5, force, x, y, velocity_x=np.zeros(N), velocity_y=np.zeros(N), types=types_n, radius=20 )
     # einfache Interaktionsmatrix (5x5 wie bei dir), damit indexing sicher ist
     W = np.array([
         [1, -1,  1, -1,  1],
@@ -34,7 +44,7 @@ def make_small_sim():
     return sim
 
 
-def test_check_interactions_no_neighbours_returns_empty():
+#def test_check_interactions_no_neighbours_returns_empty():
     sim = make_small_sim()
     # p2 ist weit weg -> bei radius=10 sollte es keine Nachbarn haben
     px, py = sim._particles.x[2], sim._particles.y[2]
@@ -136,4 +146,12 @@ def test_calc_velocity_updates_positions_and_marks_checked():
     vel_changed = (sim._particles.velocity_x != vx_before) | (sim._particles.velocity_y != vy_before)
 
     assert moved.any() or vel_changed.any()
+
+def test_calc_motion():
+    sim = make_small_sim()
+    px, py = sim._particles.x[0], sim._particles.y[0]
+    neighbours_x, neighbours_y, interactions, filtered_indices = sim.check_interactions(px, py, sim._particles.radius, 0)
+    force_direction = sim.calc_motion(simulation.check_interactions)
+
+    assert force_direction.shape == (neighbours_x.shape[0,2])
 

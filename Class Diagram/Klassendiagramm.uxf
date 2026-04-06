@@ -5,9 +5,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>36</x>
-      <y>450</y>
+      <y>432</y>
       <w>540</w>
-      <h>630</h>
+      <h>720</h>
     </coordinates>
     <panel_attributes>Particles
 --
@@ -18,6 +18,7 @@
 - velocity_y:np.ndarray
 #particles sollte doch lieber mit nur x,y und typ sein. vielleicht wird typ auch ein eigenes Array
 - type: np.ndarray
+- force: np.ndarray
 --
 + get_x():np.ndarray
 + get_y():np.ndarray
@@ -30,14 +31,16 @@
 + get_velocity_x():np.ndarray
 + get_velocity_y():np.ndarray
 + set_velocity_x(value:np.ndarray):void
-+ set_velocity_y(value:np.ndarray):void</panel_attributes>
++ set_velocity_y(value:np.ndarray):void
++ get_force():np.ndarray
++ set_force(value:np.ndarray):void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>2358</x>
-      <y>450</y>
+      <y>432</y>
       <w>756</w>
       <h>900</h>
     </coordinates>
@@ -70,7 +73,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>594</x>
-      <y>450</y>
+      <y>432</y>
       <w>1692</w>
       <h>540</h>
     </coordinates>

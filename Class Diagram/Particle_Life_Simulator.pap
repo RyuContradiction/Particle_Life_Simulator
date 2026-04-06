@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="F9592A8ABE418DBE">
-  <PROJECT FORMAT="1.00" NAME="Particle_Life_Simulator" AUTHOR="Michael" CREATED="2025.12.10 16:55:46" MODIFIED="2026.02.19 23:57:39">
+<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="3EF27C6F4FBA0D67">
+  <PROJECT FORMAT="1.00" NAME="Particle_Life_Simulator" AUTHOR="Michael" CREATED="2025.12.10 16:55:46" MODIFIED="2026.04.05 19:20:26">
     <DIAGRAMS>
       <DIAGRAM FORMAT="1.00" ID="0" NAME="main" CREATED="2025.12.10 16:56:30" MODIFIED="2026.02.19 22:42:22">
         <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="6">
@@ -231,7 +231,7 @@
           <CONNECTION FORMAT="1.00" ID="40" FROM="39" TO="2" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="12" NAME="Simulation.calc_velocity(...):void" CREATED="2026.02.19 22:21:33" MODIFIED="2026.02.19 23:57:39">
+      <DIAGRAM FORMAT="1.00" ID="12" NAME="Simulation.calc_velocity(...):void" CREATED="2026.02.19 22:21:33" MODIFIED="2026.02.25 18:06:41">
         <LAYOUT FORMAT="1.00" COLUMNS="2" ROWS="11">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
@@ -296,7 +296,7 @@
             </ENTRY>
             <ENTRY COLUMN="1" ROW="4">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="12">
-                <TEXT><![CDATA[leeres Array zurueckgeben]]></TEXT>
+                <TEXT><![CDATA[nichts zueckgeben]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="1" ROW="9">
@@ -453,6 +453,42 @@
           <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="6" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="7" FROM="6" TO="8" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="9" FROM="8" TO="2" TEXT="" />
+        </CONNECTIONS>
+      </DIAGRAM>
+      <DIAGRAM FORMAT="1.00" ID="16" NAME="Simulation.calc_motion():void" CREATED="2026.04.04 13:46:21" MODIFIED="2026.04.05 19:20:26">
+        <LAYOUT FORMAT="1.00" COLUMNS="1" ROWS="5">
+          <ENTRIES>
+            <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
+              <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
+                <TEXT><![CDATA[Simulation.calc_motion():void]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="1">
+              <FIGURE SUBTYPE="PapStart" FORMAT="1.00" ID="1">
+                <TEXT><![CDATA[Start]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="2">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="4">
+                <TEXT><![CDATA[Kraft des betrachteten Partikel in Variable speichern]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="3">
+              <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="6">
+                <TEXT><![CDATA[masken array welches aus spalten besteht welche schon masken waren um zu gucken wo im raum ein partikel ist, 7 spalten]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="4">
+              <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
+                <TEXT><![CDATA[Ende]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+          </ENTRIES>
+        </LAYOUT>
+        <CONNECTIONS>
+          <CONNECTION FORMAT="1.00" ID="3" FROM="1" TO="4" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="6" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="7" FROM="6" TO="2" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
     </DIAGRAMS>

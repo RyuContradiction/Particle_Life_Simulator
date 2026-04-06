@@ -1,20 +1,24 @@
 import numpy as np
+from numba.typed import Dict
 
 class Particles:
-    def __init__(self, 
+    def __init__(self,
+                 size: int,
+                 force: np.ndarray,
                  x: np.ndarray = np.random.normal(loc=0.0, scale=10.0, size=1000),
                  y: np.ndarray = np.random.normal(loc=0.0, scale=10.0, size=1000), 
                  velocity_x: np.ndarray = np.zeros(1000), 
                  velocity_y: np.ndarray = np.zeros(1000),  
                  types: np.ndarray = np.clip(np.rint(np.random.normal(loc=0, scale=1.0, size=1000)), 0, 4).astype(int),
                  radius: int = 15):
-            # keine Parameter
         self._x = x
         self._y = y
         self._velocity_x = velocity_x
         self._velocity_y = velocity_y
         self._types = types 
         self._radius = radius
+        self._force = force
+        self._size = size
         
             # mit property
     @property
@@ -58,3 +62,17 @@ class Particles:
     @radius.setter
     def radius(self, value: int) -> None:
         self._radius = value
+
+    @property
+    def force(self) -> np.ndarray:
+        return self._force
+    @force.setter
+    def force(self, value:np.ndarray) -> None:
+        self._force = value
+
+    @property
+    def size(self) -> int:
+        return self._size
+    @size.setter
+    def size(self, value: int) -> None:
+        self._size = value
