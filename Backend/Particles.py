@@ -19,6 +19,7 @@ class Particles:
         self._radius = radius
         self._force = force
         self._size = size
+        self._direction: np.ndarray = np.ones((self._x.shape[0],2))
         
             # mit property
     @property
@@ -76,3 +77,7 @@ class Particles:
     @size.setter
     def size(self, value: int) -> None:
         self._size = value
+
+    @property
+    def direction(self) -> np.ndarray:
+        return self._direction

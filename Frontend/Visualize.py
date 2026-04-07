@@ -36,7 +36,7 @@ class Visualize:
         self._pos0 = np.c_[x, y]
         self._scatter.set_data(self._pos0, face_color=self._colors, size=10)
 
-        self._Lx, self._Ly = 200, 200
+        self._Lx, self._Ly = 800, 800
         self._view_sim.camera.set_range(x=(-self._Lx/2, self._Lx/2), y=(-self._Ly/2, self._Ly/2))
 
         self._img = None 

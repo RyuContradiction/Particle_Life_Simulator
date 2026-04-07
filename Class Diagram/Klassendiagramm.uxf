@@ -7,7 +7,7 @@
       <x>36</x>
       <y>432</y>
       <w>540</w>
-      <h>720</h>
+      <h>828</h>
     </coordinates>
     <panel_attributes>Particles
 --
@@ -19,6 +19,7 @@
 #particles sollte doch lieber mit nur x,y und typ sein. vielleicht wird typ auch ein eigenes Array
 - type: np.ndarray
 - force: np.ndarray
+- size: int
 --
 + get_x():np.ndarray
 + get_y():np.ndarray
@@ -33,7 +34,9 @@
 + set_velocity_x(value:np.ndarray):void
 + set_velocity_y(value:np.ndarray):void
 + get_force():np.ndarray
-+ set_force(value:np.ndarray):void</panel_attributes>
++ set_force(value:np.ndarray):void
++ get_size():int
++ set_size(value:int):void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -82,6 +85,8 @@
 - interactionmatrix:np.ndarray
 - checked_particles:np.ndarray
 - particles:Particles
+- position_x:np.ndarray
+- position_y:np.ndarray
 --
 + check_interactions(position_x, position_y, radius, index) : tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
 + calc_velocity(
